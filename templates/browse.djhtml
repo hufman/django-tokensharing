@@ -1,0 +1,33 @@
+<table>
+{% if parent %}
+<td>
+<a href="{{parent}}/">⇧ up</a>
+</td>
+{% endif %}
+{% for content in contents %}
+<tr>
+<td>
+<a href="{{content.url}}">{{content.name}}
+{% if content.isdir %}
+/
+{% endif %}
+</a>
+</td>
+
+{% if loggedin %}
+<td>
+<button onclick="this.nextSibling.style.display='inline-block';this.style.display='none'">Share</button><form method="post" action="{{content.url}}" style="display:none">{%csrf_token%}
+  <input name="note" placeholder="Note"/>
+  <label for="expiration">Exp:</label>
+  <select name="expiration" id="expiration">
+    {% for time in expirations %}
+    <option value="{{time.secs}}">{{time.name}}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="Share"/>
+</form>
+</td>
+{% endif %}
+</tr>
+{% endfor %}
+</table>

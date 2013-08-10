@@ -1,0 +1,2 @@
+New token generated for {{note}}!<br>
+<a href="{{url}}">{{token}}</a>

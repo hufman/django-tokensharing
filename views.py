@@ -52,6 +52,9 @@ def browse(request,root,vars):
 			content['url'] = content['name']+"/"
 		else:
 			content['url'] = content['name']
+		content['url'] = content['url'].replace('#','%23')
+		content['url'] = content['url'].replace('?','%3f')
+		content['url'] = content['url'].replace('&','%26')
 	template = get_template('browse.djhtml')
 	context = RequestContext(request,vars)
 	context['contents'] = contents

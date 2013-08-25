@@ -15,8 +15,9 @@ def get_directory_contents(directory):
 	realdir = os.path.join(settings.SHARING_DIRECTORY,directory)
 	if len(realdir) > len(settings.SHARING_DIRECTORY) and \
 	   realdir[0:len(settings.SHARING_DIRECTORY)] == settings.SHARING_DIRECTORY:
+		if not isinstance(realdir,unicode):
+			realdir = realdir.decode('utf-8',errors='replace')
 		raw_contents = os.listdir(realdir)
-		raw_contents = [unicode(x,errors='replace') if not isinstance(x,unicode) else x for x in raw_contents]
 		raw_contents.sort()
 		contents = [{'name':x, 'path':os.path.join(directory,x),
 		  'fullpath':os.path.join(realdir,x),
